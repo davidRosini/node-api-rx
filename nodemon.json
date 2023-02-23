@@ -1,0 +1,4 @@
+{
+    "watch": ["endpoints/", "modules/", "repositories/", "test/", "schema/", "index.js", "routes.js"],
+    "ext": "js"
+  }

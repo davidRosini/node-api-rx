@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "name": "dev",
+    "username": "postgres",
+    "password": "postgres",
+    "database": "books",
+    "host": "localhost",
+    "dialect": "postgres",
+    "dialectOptions": false,
+    "schema": "public"
+  },
+  "test": {
+    "name": "test",
+    "username": "postgres",
+    "password": "postgres",
+    "database": "books-test",
+    "host": "localhost",
+    "dialect": "postgres",
+    "dialectOptions": false,
+    "schema": "public",
+    "logging": false
+  }
+}
