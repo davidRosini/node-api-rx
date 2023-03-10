@@ -1,7 +1,9 @@
+const AuthorModule = require("./author")
 const BookModule = require("./book")
 
-module.exports = (repositories) => {
+module.exports = (rep) => {
     return {
-        book: new BookModule(repositories)
+        author: new AuthorModule(rep),
+        book: new BookModule(rep),
     }
 }

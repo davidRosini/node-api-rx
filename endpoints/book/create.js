@@ -1,10 +1,12 @@
 const endpoint = async (req, res, mod) => {
     try {
-        const {name, author, year, units} = req.params
+        const {name, author_id, year, units} = req.params
+
+        //TO DO: Validate data types and author
 
         const book = await mod.book.create({
             name, 
-            author,
+            author_id,
             year,
             units,
         })

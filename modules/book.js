@@ -1,16 +1,7 @@
-class BookModule {
-    constructor(repositories){
-        this.rep = {
-            ...repositories
-        }
-    }
-
-    async list() {
-        return this.rep.book.list()
-    }
-
-    async create(values) {
-        return this.rep.book.create(values)
+const BaseModule = require("./base")
+class BookModule extends BaseModule {
+    constructor(rep){
+        super(rep, "book")
     }
 }
 

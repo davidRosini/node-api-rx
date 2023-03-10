@@ -24,6 +24,7 @@ const init = (server, mod) => {
 
     server.get("/book", async (req, res) => { await bookList(req, res, mod)})
     server.post("/book", async (req, res) => { await bookCreate(req, res, mod)})
+    //TO DO: Add routes for missing endpoints (book, author, loan)
 }
 
 module.exports.init = init
