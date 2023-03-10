@@ -12,10 +12,14 @@ module.exports = (instance, dataTypes) => {
       allowNull: false,
       type: dataTypes.STRING,
     },
-    author: {
-        allowNull: false,
-        type: dataTypes.STRING,
-    },
+    author_id: {
+      allowNull: false,
+      type: dataTypes.UUID,
+      references: {
+        model: "author",
+        key: "id",
+      },
+  },
     year: {
         allowNull: false,
         type: dataTypes.INTEGER,
@@ -45,7 +49,6 @@ module.exports = (instance, dataTypes) => {
   }
 
   const model = instance.define("book", schema, {
-    tableName: "book",
     ...shared.options,
   })
 

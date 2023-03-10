@@ -1,35 +1,53 @@
 const request = require("supertest")
 const should = require("should")
 const orm = require("../schema/models")
+const config = require("./../config")
+const server = require("./../index")
 
-const bookRepository = require("./repositories/book")
+try {
+    const host = `localhost:${config.test.port}`
 
-const bookListEndpoint = require("./endpoints/book.list")
+    const bookRepository = require("./repositories/book")
+    const bookListEndpoint = require("./endpoints/book.list")
 
-describe("API UP", () => {
-    it("Api should return message and code 200", (done) => {
-        request("localhost:3000")
-        .get("/home")
-        .end((err, res) => {
+    describe("Testing Books API", async () => {
+        it("Api should return message and code 200 \n", async () => {
+            const res = await request(host).get("/home")
+
             should(res.body.result.message).equal("Api Up!")
-            done()
+        })
+
+        before(async() => {
+            await orm.sequelize.sync({force: true})
+        })
+
+        const rep = require("../repositories")(orm)
+
+        describe("\n Testing repositories \n", async () => {
+            describe("Book", async () => {
+                await bookRepository(rep, should)
+            }) 
+        })
+
+        describe("\n Testing endpoints \n", async () => {
+            describe("Book - List endpoint", async () => {
+                await bookListEndpoint(request, should, host)
+            }) 
         })
     })
-})
 
-describe("Testing repositories", () => {
-    before(async() => {
-        await orm.sequelize.sync({force: true})
+    after(() => {
+        server.close()
+        process.exit(0)
     })
-    
-    const rep = require("../repositories")(orm)
 
-    describe("Book", async () => {
-        await bookRepository(rep, should)
-    }) 
+} catch (err){
+    console.log("Error starting test server. \n")
+    console.log(err)
+    server.close()
+    process.exit(1)
+}
 
-    describe("Book - List", async () => {
-        await bookListEndpoint(request, should)
-    }) 
-})
+
+
 

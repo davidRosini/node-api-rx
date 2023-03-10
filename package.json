@@ -6,7 +6,7 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha",
     "start": "cross-env NODE_ENV=dev nodemon index.js",
-    "stop": "node server.stop.js"
+    "db:sync": "node schema/sync.js"
   },
   "keywords": [],
   "author": "",
