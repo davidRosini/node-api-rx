@@ -36,6 +36,20 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
+/*
+  Author
+*/
+db.author.hasMany(db.book, {
+  foreingKey: "author_id",
+})
+
+/*
+  Book
+*/
+db.book.belongsTo(db.author, {
+  foreingKey: "author_id",
+})
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

@@ -8,6 +8,7 @@ try {
     const host = `localhost:${config.test.port}`
 
     const bookRepository = require("./repositories/book")
+    const authorRepository = require("./repositories/author")
     const bookListEndpoint = require("./endpoints/book.list")
 
     describe("Testing Books API", async () => {
@@ -24,9 +25,12 @@ try {
         const rep = require("../repositories")(orm)
 
         describe("\n Testing repositories \n", async () => {
-            describe("Book", async () => {
+            describe("\n Author \n", async () => {    
+                await authorRepository(rep, should)
+            })
+            describe("\n Book \n", async () => {
                 await bookRepository(rep, should)
-            }) 
+            })
         })
 
         describe("\n Testing endpoints \n", async () => {

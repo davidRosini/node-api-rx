@@ -1,47 +1,36 @@
 module.exports = async(rep, should) => {
     let id = ""
+    let author_id = ""
 
-    it("Create a book", () => {
-        return rep.book.create({
+    before(async() => {
+        author_id = (await rep.author.list())[0].id
+    })
+
+    it("Creates a book", async () => {
+        const book = await rep.book.create({
             name: "Lord of the Rings",
-            author: "Tolkien",
+            author_id,
             units: 3,
             year: 1956,
-        }).then((book) => {
-            should(book.id).not.equal(null)
-            id = book.id
-        }).catch((error) => {
-            console.log(error)
-            throw error
         })
+        should(book.id).not.equal(null)
+        id = book.id
     })
 
-    it("Read a book", () => {
-        return rep.book.read(id).then((book) => {
-            should(book.name).equal("Lord of the Rings")
-        }).catch((error) => {
-            console.log(error)
-            throw error
-        })
+    it("Reads a book", async () => {
+        const book = await rep.book.read(id)
+        should(book.name).equal("Lord of the Rings")
     })
 
-    it("Update a book", () => {
-        return rep.book.update(id, { 
+    it("Updates a book", async () => {
+        const book = await rep.book.update(id, { 
             name: "LOTR: Fellowship of the Rings"
-        }).then((book) => {
-            should(book.name).equal("LOTR: Fellowship of the Rings")
-        }).catch((error) => {
-            console.log(error)
-            throw error
         })
+        should(book.name).equal("LOTR: Fellowship of the Rings")
     })
 
-    it("List all books", () => {
-        return rep.book.list().then((books) => {
-            should(books.length).equal(1)
-        }).catch((error) => {
-            console.log(error)
-            throw error
-        })
+    it("List all books", async () => {
+        const books = await rep.book.list()
+        should(books.length).equal(1)
     })
 }
