@@ -10,6 +10,8 @@ try {
     const bookRepository = require("./repositories/book")
     const authorRepository = require("./repositories/author")
     const bookListEndpoint = require("./endpoints/book.list")
+    const authorCreateEndpoint = require("./endpoints/author.create")   
+
 
     describe("Testing Books API", async () => {
         it("Api should return message and code 200 \n", async () => {
@@ -36,6 +38,9 @@ try {
         describe("\n Testing endpoints \n", async () => {
             describe("Book - List endpoint", async () => {
                 await bookListEndpoint(request, should, host)
+            })
+            describe("Author - Create endpoint", async() => {
+                await authorCreateEndpoint(request, should, host)
             }) 
         })
     })

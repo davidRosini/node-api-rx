@@ -6,8 +6,8 @@ No need to hurry though, as we're not expecting for you to complete all these ta
 Take the ones you're more confortable with, and feel free to ask any questions, install a package you think is useful
 or search on the web (not on ChatGPT, though =().
 
-If you really understand about Sequelize, data modeling and Unit Tests (using mocha and supertest), and think the TODO tasks
-are kind of easy, we would ask you to go a step ahead and create our loan functionality. That would include:
+If you really understand about Sequelize, data modeling and Unit Tests (using mocha and supertest), 
+we would ask you to go a step ahead and create our loan functionality. That would include:
     - Model 
     - Relationship
     - Repository
