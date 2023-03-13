@@ -41,6 +41,7 @@ Object.keys(db).forEach(modelName => {
 */
 db.author.hasMany(db.book, {
   foreingKey: "author_id",
+  onDelete: "cascade"
 })
 
 /*
@@ -48,6 +49,13 @@ db.author.hasMany(db.book, {
 */
 db.book.belongsTo(db.author, {
   foreingKey: "author_id",
+})
+
+/*
+  Loan
+*/
+db.loan.belongsTo(db.book, {
+  foreingKey: "book_id",
 })
 
 db.sequelize = sequelize;

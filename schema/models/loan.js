@@ -8,21 +8,17 @@ module.exports = (instance, dataTypes) => {
       defaultValue: dataTypes.UUIDV4,
       primaryKey: true,
     },
-    name: {
+    customer_id: {
       allowNull: false,
-      type: dataTypes.STRING,
+      type: dataTypes.UUID
     },
-    author_id: {
+    book_id: {
       allowNull: false,
       type: dataTypes.UUID,
       references: {
-        model: "author",
+        model: "book",
         key: "id",
       },
-    },
-    year: {
-        allowNull: false,
-        type: dataTypes.INTEGER,
     },
     units: {
         allowNull: false,
@@ -31,7 +27,7 @@ module.exports = (instance, dataTypes) => {
     ...shared.fields,
   }
 
-  const model = instance.define("book", schema, {
+  const model = instance.define("loan", schema, {
     ...shared.options,
   })
 

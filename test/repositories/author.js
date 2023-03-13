@@ -14,6 +14,11 @@ module.exports = async(rep, should) => {
         should(author.name).equal("JRR Tolkien")
     })
 
+    it("Reads an author by name", async () => {
+        const author = await rep.author.findOneByName("JRR Tolkien")
+        should(author.id).equal(id)
+    })
+
     it("Updates an author", async () => {
         const author = await rep.author.update(id, { 
             name: "J.R.R Tokien"
@@ -24,5 +29,15 @@ module.exports = async(rep, should) => {
     it("List all authors", async () => {
         const authors = await rep.author.list()
         should(authors.length).equal(1)
+    })
+
+    it("Delete a author", async () => {
+        const author = await rep.author.create({
+            name: "JRR Tolkien delete",
+        })
+        should(author.id).not.equal(null)
+
+        const deleted = await rep.author.delete(author.id)
+        should(deleted).equal(1)
     })
 }

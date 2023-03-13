@@ -33,7 +33,14 @@ class BaseRepository {
             return false
         }
     }
-    
+
+    async delete(id) {
+        return await this.orm[this.model].destroy({
+            where: {
+                id,
+            }
+        })
+    }
 }
 
 module.exports = BaseRepository

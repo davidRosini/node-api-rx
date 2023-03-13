@@ -1,7 +1,14 @@
+const uuid = require('uuid');
 const authorSchema = require('../validators/authorSchema')
 
 const endpoint = async (req, res, mod) => {
     try {
+        const id = req.params.id
+
+        if (!uuid.validate(id)) {
+            throw new Error("Invalid id format")
+        }
+
         const {name} = req.params
 
         await authorSchema.validate({
@@ -14,7 +21,7 @@ const endpoint = async (req, res, mod) => {
             throw new Error("Error duplicated author")
         }
 
-        const author = await mod.author.create({
+        const author = await mod.author.update(id, {
             name,
         })
 
